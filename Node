@@ -6,8 +6,8 @@
 
 #define firebase_host "temp-nodewise.firebaseio.com"
 #define firebase_auth "WrXvNdIzt9lyGonFsevXW94KpijCfHJZ3pN6Tpws"
-#define WIFI_SSID "dhrumil"                                             //wifi name for node mcu to connect with 
-#define WIFI_PASSWORD "9825381851"
+#define WIFI_SSID "eclipse"                                             //wifi name for node mcu to connect with 
+#define WIFI_PASSWORD "meet12345"
 
 WiFiUDP ntpUDP;
 const int moisture_pin =A0;
@@ -65,16 +65,19 @@ void loop() {
       Firebase.setInt("RESET_NODES/RESET_NODE1",0);
       reset_fun();
     }
-    //block of moisture starts here
-     
+
+
+    
+    //block of moisture starts here     
     int moisture_value=analogRead(moisture_pin);         // moisture value extract 
     Serial.println(moisture_value);
-
     //block of moisture ends here
 
-     //firebase upload of the soil moisture data starts here
-    Firebase.setInt("/node1/"+dayStamp+"/Moisture/"+time1, moisture_value);
-    Firebase.setInt("/node1/temp",moisture_value);
+    //firebase upload of the soil moisture data starts here
+    Firebase.setInt("/node_data/node1/"+dayStamp+"/"+time1+"/Moisture/", moisture_value);
+    Firebase.setInt("/node1/Moisture/", moisture_value);
+// I think temperature should be taken from master node and thus not including it's reading from slave node        ----------------DHRUMIL 
+//  Firebase.setInt("/node1/"+dayStamp+"/"+time1+"/Temperature/", moisture_value);    
     if(Firebase.failed())
     {
       Serial.println("Failed!!!");
