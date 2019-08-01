@@ -85,15 +85,6 @@ void loop() {
     else{
       Serial.println("success");
       }
-   /* Firebase.pushString("/"+dayStamp+"/node1"+"/Moisture/"+hrs+"/"+min1, moisture);                           
-    if(Firebase.failed())
-    {
-      Serial.println("Failed"); 
-    }
-    else
-    {
-      Serial.println("Success"); 
-    }*/
     delay(30000);
     //firebase upload of the soil moisture data ends here
 
