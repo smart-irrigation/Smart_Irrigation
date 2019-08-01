@@ -7,8 +7,8 @@
 
 #define firebase_host "temp-nodewise.firebaseio.com"
 #define firebase_auth "WrXvNdIzt9lyGonFsevXW94KpijCfHJZ3pN6Tpws"
-#define WIFI_SSID "dhrumil"                                             //wifi name for node mcu to connect with 
-#define WIFI_PASSWORD "9825381851"
+#define WIFI_SSID "wifissid"                                             //wifi name for node mcu to connect with 
+#define WIFI_PASSWORD "password"
 
 WiFiUDP ntpUDP;
 
