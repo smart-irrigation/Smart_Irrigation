@@ -61,13 +61,17 @@ const int index_moisture_dry= 500;                                          // r
 const int index_moisture_notdry=375;                                        //reading for the moist state
   
 int master_reset;
-
+int manual;
+int manual_on;
 void loop() {
   if(startup==0)
   {
     startup=1;
     reset_fun();
   }
+  manual=Firebase.getInt("/MASTER/manual");
+  if(manual==0)
+  {
     timeClient.update();
     formattedDate =(String)timeClient.getFormattedDate();
     int splitT = formattedDate.indexOf("T");
@@ -136,15 +140,31 @@ void loop() {
       else{
         Serial.println("log created!!!");
       }*/
+      int temp_value;
       while(n>=0)
       {
+        temp_value=Firebase.getInt("/node1/loop_value/value");
+        if(temp_value>400){
+          break;
+        }
         digitalWrite(relay1, LOW);
         n--;
-        delay(4000);
+        delay(5000);
       }
       digitalWrite(relay1, HIGH);
     }
     
     
     delay(2000);
+  }
+  else{
+    manual_on=Firebase.getInt("/MASTER/moter_on_off");
+    if(manual_on==1)
+    {
+      digitalWrite(relay1, LOW);
+    }
+    else{
+      digitalWrite(relay1, HIGH);
+    }
+  }
 }
